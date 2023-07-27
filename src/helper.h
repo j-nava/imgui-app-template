@@ -13,7 +13,6 @@ struct Texture {
 typedef struct Texture Texture;
 
 struct Resource {
-  bool success;
   void* ptr;
   size_t size_bytes;
 };

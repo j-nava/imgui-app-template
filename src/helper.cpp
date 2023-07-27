@@ -92,7 +92,7 @@ void helper_text_centered(std::string text) {
 Resource helper_load_resource(const int resource_id) {
   HRSRC hResource = FindResourceEx(nullptr, L"DATA", MAKEINTRESOURCE(resource_id), MAKELANGID(LANG_NEUTRAL, SUBLANG_NEUTRAL));
   Resource r;
-  r.success = false;
+  bool success = false;
 
   if (hResource) {
     HGLOBAL hMemory = LoadResource(nullptr, hResource);
@@ -101,9 +101,10 @@ Resource helper_load_resource(const int resource_id) {
       void* ptr = LockResource(hMemory);
       r.ptr = ptr;
       r.size_bytes = size_bytes;
-      r.success = true;
+      success = true;
     }
   }
+  IM_ASSERT(success);
 
   return r;
 }
