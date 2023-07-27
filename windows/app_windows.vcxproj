@@ -85,7 +85,7 @@
     <ClCompile>
       <WarningLevel>Level4</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>imgui;imgui\backends;stb;%(AdditionalIncludeDirectories);</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\src;..\stb;..\imgui;..\imgui\backends;stb;%(AdditionalIncludeDirectories);</AdditionalIncludeDirectories>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
@@ -99,7 +99,7 @@
     <ClCompile>
       <WarningLevel>Level4</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>imgui;imgui\backends;stb;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\src;..\stb;..\imgui;..\imgui\backends;stb;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
@@ -115,7 +115,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>imgui;imgui\backends;stb;%(AdditionalIncludeDirectories);</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\src;..\stb;..\imgui;..\imgui\backends;stb;%(AdditionalIncludeDirectories);</AdditionalIncludeDirectories>
       <BufferSecurityCheck>false</BufferSecurityCheck>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
@@ -134,7 +134,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>imgui;imgui\backends;stb;%(AdditionalIncludeDirectories);</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\src;..\stb;..\imgui;..\imgui\backends;stb;%(AdditionalIncludeDirectories);</AdditionalIncludeDirectories>
       <BufferSecurityCheck>false</BufferSecurityCheck>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
@@ -148,34 +148,34 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="app.h" />
-    <ClInclude Include="helper.h" />
-    <ClInclude Include="imgui\imconfig.h" />
-    <ClInclude Include="imgui\imgui.h" />
-    <ClInclude Include="imgui\imgui_internal.h" />
-    <ClInclude Include="imgui\backends\imgui_impl_dx11.h" />
-    <ClInclude Include="imgui\backends\imgui_impl_win32.h" />
-    <ClInclude Include="stb\stb_image.h" />
+    <ClInclude Include="..\..\app.h" />
+    <ClInclude Include="..\src\helper.h" />
+    <ClInclude Include="..\imgui\imconfig.h" />
+    <ClInclude Include="..\imgui\imgui.h" />
+    <ClInclude Include="..\imgui\imgui_internal.h" />
+    <ClInclude Include="..\imgui\backends\imgui_impl_dx11.h" />
+    <ClInclude Include="..\imgui\backends\imgui_impl_win32.h" />
+    <ClInclude Include="..\stb\stb_image.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="app.cpp" />
-    <ClCompile Include="helper.cpp" />
-    <ClCompile Include="imgui\imgui.cpp" />
-    <ClCompile Include="imgui\imgui_demo.cpp" />
-    <ClCompile Include="imgui\imgui_draw.cpp" />
-    <ClCompile Include="imgui\imgui_tables.cpp" />
-    <ClCompile Include="imgui\imgui_widgets.cpp" />
-    <ClCompile Include="imgui\backends\imgui_impl_dx11.cpp" />
-    <ClCompile Include="imgui\backends\imgui_impl_win32.cpp" />
-    <ClCompile Include="main.cpp" />
+    <ClCompile Include="..\..\app.cpp" />
+    <ClCompile Include="..\src\helper.cpp" />
+    <ClCompile Include="..\imgui\imgui.cpp" />
+    <ClCompile Include="..\imgui\imgui_demo.cpp" />
+    <ClCompile Include="..\imgui\imgui_draw.cpp" />
+    <ClCompile Include="..\imgui\imgui_tables.cpp" />
+    <ClCompile Include="..\imgui\imgui_widgets.cpp" />
+    <ClCompile Include="..\imgui\backends\imgui_impl_dx11.cpp" />
+    <ClCompile Include="..\imgui\backends\imgui_impl_win32.cpp" />
+    <ClCompile Include="..\src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="imgui\misc\debuggers\imgui.natstepfilter" />
-    <None Include="imgui\misc\debuggers\imgui.natvis" />
+    <None Include="..\imgui\misc\debuggers\imgui.natstepfilter" />
+    <None Include="..\imgui\misc\debuggers\imgui.natvis" />
     <None Include="..\README.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="app.rc" />
+    <ResourceCompile Include="..\..\app.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
