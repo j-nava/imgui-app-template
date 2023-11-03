@@ -1,3 +1,5 @@
+#ifdef PLATFORM_WINDOWS
+
 #include "imgui.h"
 #include "imgui_impl_win32.h"
 #include "imgui_impl_dx11.h"
@@ -226,3 +228,4 @@ int WINAPI wWinMain(HINSTANCE, HINSTANCE, PWSTR, int) {
   main(0, NULL);
 }
 
+#endif
