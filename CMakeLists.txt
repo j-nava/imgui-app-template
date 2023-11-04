@@ -6,18 +6,19 @@ include(FetchContent)
 set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_SCAN_FOR_MODULES ON)
+set(FETCHCONTENT_UPDATES_DISCONNECTED ON)
 
 # -----------------------------------------------------------------------------------------------------
 
 FetchContent_Declare(
   imgui 
   GIT_REPOSITORY https://github.com/ocornut/imgui
-  GIT_TAG        208b8242bc8dfc86c2cb0a22156eef4cb5977476 #docking
+  GIT_TAG        docking
 )
 FetchContent_Declare(
   stb 
   GIT_REPOSITORY https://github.com/nothings/stb
-  GIT_TAG        beebb24b945efdea3b9bba23affb8eb3ba8982e7 #master
+  GIT_TAG        master
 )
 FetchContent_MakeAvailable(imgui stb)
 
