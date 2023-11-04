@@ -8,7 +8,7 @@ module;
 
 export module helper;
 
-extern ID3D11Device* g_pd3dDevice;
+extern "C++" ID3D11Device* g_pd3dDevice;
 struct Texture {
   ID3D11ShaderResourceView* t;
   int width = 0;
