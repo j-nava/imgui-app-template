@@ -1,10 +1,10 @@
 module;
 
 #define STB_IMAGE_IMPLEMENTATION
+#include <d3d11.h>
 #include <string>
 #include "stb_image.h"
 #include "imgui.h"
-#include <d3d11.h>
 
 export module helper;
 
