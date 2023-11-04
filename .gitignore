@@ -1,5 +1,6 @@
 .vs/
 Release/
 Debug/
+build/
 *.aps
 app.ini

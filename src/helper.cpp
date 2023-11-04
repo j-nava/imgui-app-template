@@ -1,9 +1,28 @@
-#include "helper.h"
+module;
 
 #define STB_IMAGE_IMPLEMENTATION
+#include <string>
 #include "stb_image.h"
+#include "imgui.h"
+#include <d3d11.h>
 
-void helper_init() {
+export module helper;
+
+extern ID3D11Device* g_pd3dDevice;
+struct Texture {
+  ID3D11ShaderResourceView* t;
+  int width = 0;
+  int height = 0;
+};
+typedef struct Texture Texture;
+
+struct Resource {
+  void* ptr;
+  size_t size_bytes;
+};
+typedef struct Resource Resource;
+
+export void helper_init() {
   ImGui::GetIO().IniFilename = "app.ini";
 }
 
@@ -46,7 +65,7 @@ bool LoadTexture(unsigned char* image_data, int image_width, int image_height, I
 
   return true;
 }
-bool helper_load_texture_from_file(const char* filename, ID3D11ShaderResourceView** out_srv, int* out_width, int* out_height) {
+export bool helper_load_texture_from_file(const char* filename, ID3D11ShaderResourceView** out_srv, int* out_width, int* out_height) {
   int image_width = 0;
   int image_height = 0;
   unsigned char* image_data = stbi_load(filename, &image_width, &image_height, NULL, 4);
@@ -56,7 +75,7 @@ bool helper_load_texture_from_file(const char* filename, ID3D11ShaderResourceVie
   stbi_image_free(image_data);
   return res;
 }
-bool helper_load_texture_from_memory(const unsigned char* buffer, int len, ID3D11ShaderResourceView** out_srv, int* out_width, int* out_height) {
+export bool helper_load_texture_from_memory(const unsigned char* buffer, int len, ID3D11ShaderResourceView** out_srv, int* out_width, int* out_height) {
   int image_width = 0;
   int image_height = 0;
   unsigned char* image_data = stbi_load_from_memory(buffer, len, &image_width, &image_height, NULL, 4);
@@ -67,7 +86,7 @@ bool helper_load_texture_from_memory(const unsigned char* buffer, int len, ID3D1
   return res;
 }
 
-void helper_text_centered(std::string text) {
+export void helper_text_centered(std::string text) {
   float win_width = ImGui::GetWindowSize().x;
   float text_width = ImGui::CalcTextSize(text.c_str()).x;
 
