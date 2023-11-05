@@ -44,7 +44,7 @@ set(imgui_sources
   )
 if(PLATFORM_WINDOWS)
   set(imgui_platform_libs
-    "d3d11" "d3dcompiler" "Rpcrt4" "Advapi32" "Ole32" "Dwmapi" "gdi32" "Bcrypt"
+    d3d11 d3dcompiler Rpcrt4 Advapi32 Ole32 Dwmapi gdi32
   )
 endif()
 if(PLATFORM_WASM)
