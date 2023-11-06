@@ -109,6 +109,32 @@ export void helper_text_centered(std::string text) {
   ImGui::Text("");
 }
 
+export void helper_viewport_dockspace() {
+  ImGui::DockSpaceOverViewport(NULL, ImGuiDockNodeFlags_PassthruCentralNode, NULL);
+}
+
+export void helper_begin_maximized() {
+  const ImGuiViewport* viewport = ImGui::GetMainViewport();
+  ImGui::SetNextWindowPos(viewport->WorkPos);
+  ImGui::SetNextWindowSize(viewport->WorkSize);
+  ImGui::SetNextWindowViewport(viewport->ID);
+  ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 0.0f);
+  ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, 0.0f);
+  ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0.0f, 0.0f));
+  ImGuiWindowFlags window_flags =  ImGuiWindowFlags_NoDocking;
+  // window_flags |= ImGuiWindowFlags_MenuBar;
+  window_flags |= ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove;
+  window_flags |= ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoNavFocus;
+  window_flags |= ImGuiWindowFlags_NoBackground;
+
+  ImGui::Begin("Main", nullptr, window_flags);
+  ImGui::PopStyleVar(3);
+
+  ImGuiDockNodeFlags dockspace_flags = ImGuiDockNodeFlags_None | ImGuiDockNodeFlags_PassthruCentralNode;
+  ImGuiID dockspace_id = ImGui::GetID("MainDockspace");
+  ImGui::DockSpace(dockspace_id, ImVec2(0.0f, 0.0f), dockspace_flags);
+}
+
 Resource helper_load_resource(const int resource_id) {
   HRSRC hResource = FindResourceEx(nullptr, L"DATA", MAKEINTRESOURCE(resource_id), MAKELANGID(LANG_NEUTRAL, SUBLANG_NEUTRAL));
   Resource r;
