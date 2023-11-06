@@ -6,7 +6,6 @@ include(FetchContent)
 set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_SCAN_FOR_MODULES ON)
-set(FETCHCONTENT_UPDATES_DISCONNECTED ON)
 
 # -----------------------------------------------------------------------------------------------------
 
@@ -63,6 +62,13 @@ target_link_libraries(imgui ${imgui_libs})
 
 # -----------------------------------------------------------------------------------------------------
 
+add_custom_target(imgui_modules
+  COMMAND clang++ -std=c++23 -xc++-system-header --precompile ${imgui_SOURCE_DIR}/imgui.h -o imgui.pcm
+  VERBATIM
+)
+
+# -----------------------------------------------------------------------------------------------------
+
 set(modules
   "src/helper.cpp"
   )
@@ -83,3 +89,4 @@ endif()
 target_include_directories(imgui_app_template PRIVATE ${imgui_SOURCE_DIR} ${imgui_SOURCE_DIR}/backends ${stb_SOURCE_DIR})
 target_sources(imgui_app_template PUBLIC FILE_SET CXX_MODULES FILES ${modules})
 target_link_libraries(imgui_app_template imgui)
+add_dependencies(imgui_app_template imgui_modules)
