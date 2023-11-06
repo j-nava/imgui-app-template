@@ -1,12 +1,13 @@
 module;
 
 #define STB_IMAGE_IMPLEMENTATION
-#include <d3d11.h>
 #include <string>
+#include <d3d11.h>
 #include "stb_image.h"
-#include "imgui.h"
 
 export module helper;
+
+import "imgui.h";
 
 extern "C++" ID3D11Device* g_pd3dDevice;
 struct Texture {
