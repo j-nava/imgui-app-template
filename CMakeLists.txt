@@ -27,6 +27,12 @@ if(PLATFORM_WINDOWS)
     "${imgui_SOURCE_DIR}/backends/imgui_impl_dx11.cpp"
   )
 endif()
+if(PLATFORM_SDL2GL3)
+  set(imgui_platform_sources
+    "${imgui_SOURCE_DIR}/backends/imgui_impl_sdl2.cpp"
+    "${imgui_SOURCE_DIR}/backends/imgui_impl_opengl3.cpp"
+  )
+endif()
 if(PLATFORM_WASM)
   set(imgui_platform_sources
     "${imgui_SOURCE_DIR}/backends/imgui_impl_glfw.cpp"
@@ -44,6 +50,11 @@ set(imgui_sources
 if(PLATFORM_WINDOWS)
   set(imgui_platform_libs
     d3d11 d3dcompiler Rpcrt4 Advapi32 Ole32 Dwmapi gdi32
+  )
+endif()
+if(PLATFORM_SDL2GL3)
+  set(imgui_platform_libs
+    GL SDL2
   )
 endif()
 if(PLATFORM_WASM)
