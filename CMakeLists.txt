@@ -54,7 +54,7 @@ if(PLATFORM_WINDOWS)
 endif()
 if(PLATFORM_SDL2GL3)
   set(imgui_platform_libs
-    GL SDL2
+    ""
   )
 endif()
 if(PLATFORM_WASM)
@@ -100,7 +100,7 @@ endif()
 if(PLATFORM_SDL2GL3)
   find_package(SDL2 REQUIRED)
   include_directories(imgui_app_template ${SDL2_INCLUDE_DIRS})
-  target_link_libraries(imgui_app_template ${SDL2_LIBRARIES})
+  target_link_libraries(imgui_app_template SDL2::SDL2-static)
 endif()
 target_include_directories(imgui_app_template PRIVATE ${imgui_SOURCE_DIR} ${imgui_SOURCE_DIR}/backends ${stb_SOURCE_DIR})
 target_sources(imgui_app_template PUBLIC FILE_SET CXX_MODULES FILES ${modules})
