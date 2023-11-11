@@ -2,16 +2,22 @@ module;
 
 #define STB_IMAGE_IMPLEMENTATION
 #include <string>
-#include <d3d11.h>
 #include "stb_image.h"
+#if PLATFORM_WINDOWS
+#include <d3d11.h>
+#endif
 
 export module helper;
 
 import "imgui.h";
 
+#if PLATFORM_WINDOWS
 extern "C++" ID3D11Device* g_pd3dDevice;
+#endif
 struct Texture {
+#if PLATFORM_WINDOWS
   ID3D11ShaderResourceView* t;
+#endif
   int width = 0;
   int height = 0;
 };
@@ -27,6 +33,7 @@ export void helper_init() {
   ImGui::GetIO().IniFilename = "app.ini";
 }
 
+#if PLATFORM_WINDOWS
 bool LoadTexture(unsigned char* image_data, int image_width, int image_height, ID3D11ShaderResourceView** out_srv, int* out_width, int* out_height)
 {
   // Create texture
@@ -86,6 +93,7 @@ export bool helper_load_texture_from_memory(const unsigned char* buffer, int len
   stbi_image_free(image_data);
   return res;
 }
+#endif
 
 export void helper_text_centered(std::string text) {
   float win_width = ImGui::GetWindowSize().x;
@@ -135,6 +143,7 @@ export void helper_begin_maximized() {
   ImGui::DockSpace(dockspace_id, ImVec2(0.0f, 0.0f), dockspace_flags);
 }
 
+#if PLATFORM_WINDOWS
 Resource helper_load_resource(const int resource_id) {
   HRSRC hResource = FindResourceEx(nullptr, L"DATA", MAKEINTRESOURCE(resource_id), MAKELANGID(LANG_NEUTRAL, SUBLANG_NEUTRAL));
   Resource r;
@@ -175,3 +184,4 @@ Texture helper_load_resource_texture(const int resource_id) {
   return tex;
 }
 
+#endif
