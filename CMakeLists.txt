@@ -93,6 +93,8 @@ set(sources
   ${modules}
   "src/main-windows.cpp"
   "src/main-wasm.cpp"
+  "src/main-sdl2gl3.cpp"
+  "src/main-glfwgl3.cpp"
   )
 
 add_library(imgui_app_template STATIC ${sources})
