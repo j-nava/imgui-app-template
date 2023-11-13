@@ -33,6 +33,12 @@ if(PLATFORM_SDL2GL3)
     "${imgui_SOURCE_DIR}/backends/imgui_impl_opengl3.cpp"
   )
 endif()
+if(PLATFORM_GLFWGL3)
+  set(imgui_platform_sources
+    "${imgui_SOURCE_DIR}/backends/imgui_impl_glfw.cpp"
+    "${imgui_SOURCE_DIR}/backends/imgui_impl_opengl3.cpp"
+  )
+endif()
 if(PLATFORM_WASM)
   set(imgui_platform_sources
     "${imgui_SOURCE_DIR}/backends/imgui_impl_glfw.cpp"
