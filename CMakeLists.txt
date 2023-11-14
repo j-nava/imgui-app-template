@@ -5,7 +5,7 @@ include(FetchContent)
 
 set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_CXX_STANDARD 23)
-set(CMAKE_CXX_SCAN_FOR_MODULES ON)
+set(CMAKE_CXX_SCAN_FOR_MODULES OFF)
 
 # -----------------------------------------------------------------------------------------------------
 
@@ -79,10 +79,10 @@ target_link_libraries(imgui ${imgui_libs})
 
 # -----------------------------------------------------------------------------------------------------
 
-add_custom_target(imgui_modules
-  COMMAND clang++ -std=c++23 -xc++-system-header --precompile ${imgui_SOURCE_DIR}/imgui.h -o imgui.pcm
-  VERBATIM
-)
+#add_custom_target(imgui_modules
+#  COMMAND clang++ -std=c++23 -xc++-system-header --precompile ${imgui_SOURCE_DIR}/imgui.h -o imgui.pcm
+#  VERBATIM
+#)
 
 # -----------------------------------------------------------------------------------------------------
 
@@ -107,11 +107,19 @@ if(PLATFORM_WASM)
 endif()
 if(PLATFORM_SDL2GL3)
   find_package(SDL2 REQUIRED)
+  find_package(OpenGL REQUIRED)
   include_directories(imgui_app_template ${SDL2_INCLUDE_DIRS})
   target_link_libraries(imgui_app_template SDL2::SDL2-static)
+  target_link_libraries(imgui_app_template OpenGL::GL)
+endif()
+if(PLATFORM_GLFWGL3)
+  find_package(glfw3 3.3 REQUIRED)
+  find_package(OpenGL REQUIRED)
+  target_link_libraries(imgui_app_template glfw)
+  target_link_libraries(imgui_app_template OpenGL::GL)
 endif()
 target_include_directories(imgui_app_template PRIVATE ${imgui_SOURCE_DIR} ${imgui_SOURCE_DIR}/backends ${stb_SOURCE_DIR})
-target_sources(imgui_app_template PUBLIC FILE_SET CXX_MODULES FILES ${modules})
+#target_sources(imgui_app_template PUBLIC FILE_SET CXX_MODULES FILES ${modules})
 target_link_libraries(imgui_app_template imgui)
-target_compile_options(imgui_app_template PRIVATE "-fmodule-file=${imgui_app_template_BINARY_DIR}/imgui.pcm")
-add_dependencies(imgui_app_template imgui_modules)
+#target_compile_options(imgui_app_template PRIVATE "-fmodule-file=${imgui_app_template_BINARY_DIR}/imgui.pcm")
+#add_dependencies(imgui_app_template imgui_modules)

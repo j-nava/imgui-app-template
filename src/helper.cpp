@@ -1,4 +1,4 @@
-module;
+#include "helper.h"
 
 #define STB_IMAGE_IMPLEMENTATION
 #include <string>
@@ -6,10 +6,6 @@ module;
 #if PLATFORM_WINDOWS
 #include <d3d11.h>
 #endif
-
-export module helper;
-
-import "imgui.h";
 
 #if PLATFORM_WINDOWS
 extern "C++" ID3D11Device* g_pd3dDevice;
@@ -29,7 +25,7 @@ struct Resource {
 };
 typedef struct Resource Resource;
 
-export void helper_init() {
+void helper_init() {
   ImGui::GetIO().IniFilename = "app.ini";
 }
 
@@ -73,7 +69,7 @@ bool LoadTexture(unsigned char* image_data, int image_width, int image_height, I
 
   return true;
 }
-export bool helper_load_texture_from_file(const char* filename, ID3D11ShaderResourceView** out_srv, int* out_width, int* out_height) {
+bool helper_load_texture_from_file(const char* filename, ID3D11ShaderResourceView** out_srv, int* out_width, int* out_height) {
   int image_width = 0;
   int image_height = 0;
   unsigned char* image_data = stbi_load(filename, &image_width, &image_height, NULL, 4);
@@ -83,7 +79,7 @@ export bool helper_load_texture_from_file(const char* filename, ID3D11ShaderReso
   stbi_image_free(image_data);
   return res;
 }
-export bool helper_load_texture_from_memory(const unsigned char* buffer, int len, ID3D11ShaderResourceView** out_srv, int* out_width, int* out_height) {
+bool helper_load_texture_from_memory(const unsigned char* buffer, int len, ID3D11ShaderResourceView** out_srv, int* out_width, int* out_height) {
   int image_width = 0;
   int image_height = 0;
   unsigned char* image_data = stbi_load_from_memory(buffer, len, &image_width, &image_height, NULL, 4);
@@ -95,7 +91,7 @@ export bool helper_load_texture_from_memory(const unsigned char* buffer, int len
 }
 #endif
 
-export void helper_text_centered(std::string text) {
+void helper_text_centered(std::string text) {
   float win_width = ImGui::GetWindowSize().x;
   float text_width = ImGui::CalcTextSize(text.c_str()).x;
 
@@ -117,11 +113,11 @@ export void helper_text_centered(std::string text) {
   ImGui::Text("");
 }
 
-export void helper_viewport_dockspace() {
+void helper_viewport_dockspace() {
   ImGui::DockSpaceOverViewport(NULL, ImGuiDockNodeFlags_PassthruCentralNode, NULL);
 }
 
-export void helper_begin_maximized() {
+void helper_begin_maximized() {
   const ImGuiViewport* viewport = ImGui::GetMainViewport();
   ImGui::SetNextWindowPos(viewport->WorkPos);
   ImGui::SetNextWindowSize(viewport->WorkSize);
