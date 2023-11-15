@@ -42,7 +42,7 @@ endif()
 if(PLATFORM_WASM)
   set(imgui_platform_sources
     "${imgui_SOURCE_DIR}/backends/imgui_impl_glfw.cpp"
-    "${imgui_SOURCE_DIR}/backends/imgui_impl_wgpu.cpp"
+    "${imgui_SOURCE_DIR}/backends/imgui_impl_opengl3.cpp"
   )
 endif()
 set(imgui_sources
@@ -104,6 +104,9 @@ if(PLATFORM_WINDOWS)
 endif()
 if(PLATFORM_WASM)
   target_compile_definitions(imgui_app_template PRIVATE PLATFORM_WASM)
+  target_link_options(imgui_app_template PRIVATE -s DISABLE_EXCEPTION_CATCHING=1)
+  target_compile_options(imgui_app_template PRIVATE -s DISABLE_EXCEPTION_CATCHING=1)
+  target_link_options(imgui_app_template PRIVATE -s USE_GLFW=3 -s WASM=1 -s ALLOW_MEMORY_GROWTH=1 -s NO_EXIT_RUNTIME=0 -s ASSERTIONS=1)
 endif()
 if(PLATFORM_SDL2GL3)
   find_package(SDL2 REQUIRED)
