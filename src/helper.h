@@ -1,5 +1,8 @@
 #pragma once
 
+#include "imgui.h"
+#include "imgui_internal.h"
+
 #include <string>
 
 void helper_init(); 
