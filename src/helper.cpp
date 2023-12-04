@@ -1,5 +1,8 @@
 #include "helper.h"
 
+#include "imgui.h"
+#include "imgui_internal.h"
+
 #define STB_IMAGE_IMPLEMENTATION
 #include <string>
 #include "stb_image.h"
@@ -115,6 +118,24 @@ void helper_text_centered(std::string text) {
 
 void helper_viewport_dockspace() {
   ImGui::DockSpaceOverViewport(NULL, ImGuiDockNodeFlags_PassthruCentralNode, NULL);
+}
+
+void helper_viewport_dockspace_left_right(std::string left, std::string right, float ratio) {
+  ImGuiID dockspace_id = ImGui::DockSpaceOverViewport(ImGui::GetMainViewport());
+  static ImGuiID main_id = 0;
+
+  if (ImGui::DockBuilderGetNode(main_id) == 0) {
+      ImGuiDockNodeFlags dockSpaceFlags = ImGuiDockNodeFlags_PassthruCentralNode;
+      ImGui::DockBuilderRemoveNode(dockspace_id);
+      main_id = ImGui::DockBuilderAddNode(dockspace_id, dockSpaceFlags);
+
+      ImGuiID left_id, right_id;
+      ImGui::DockBuilderSplitNode(main_id, ImGuiDir_Left, ratio, &left_id, &right_id);
+
+      ImGui::DockBuilderDockWindow(left.c_str(), left_id);
+      ImGui::DockBuilderDockWindow(right.c_str(), right_id);
+  }
+
 }
 
 void helper_begin_maximized() {
